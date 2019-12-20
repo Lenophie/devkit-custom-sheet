@@ -609,12 +609,23 @@ if( file_exists($game."/images/logo.zip") )
 
 echo '<div class="uk-grid images">';
 
-if( file_exists($game.'/images/logo.png') ) {
-	echo '<div class="uk-width-medium-1-2"><a href="'.$game.'/images/logo.png"><img src="'.$game.'/images/logo.png" alt="logo" /></a></div>';
-}
-
-if( file_exists($game.'/images/icon.png') ) {
-	echo '<div class="uk-width-medium-1-2"><a href="'.$game.'/images/icon.png"><img src="'.$game.'/images/icon.png" alt="logo" /></a></div>';
+if ($handle = opendir($game.'/images'))
+{
+$found = 0;
+/* This is the correct way to loop over the directory. */
+while (false !== ($entry = readdir($handle)))
+{
+	if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" )
+	{
+		if( substr($entry,0,4) == "logo")
+		{
+			echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/'.$entry.'" alt="logo" /></a></div>';
+			$found++;
+		} elseif (substr($entry,0,4) == "icon") {
+			echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/'.$entry.'" alt="icon" /></a></div>';
+			$found++;
+		}
+	}
 }
 
 echo '</div>';
