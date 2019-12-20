@@ -263,7 +263,16 @@ foreach( $xml->children() as $child )
 				$credits[$i][$subchild->getName()] = $subchild;
 				$i++;
 			}
-			break;					
+			break;
+		case("contacts"):
+			$contacts = array();
+			$i = 0;
+			foreach( $child->children() as $subchild )
+			{
+				$contacts[$i][$subchild->getName()] = $subchild;
+				$i++;
+			}
+			break;
 	}
 }
 
@@ -287,16 +296,7 @@ foreach( $xml->children() as $child )
 			break;
 		case("analytics"):
 			define("ANALYTICS", $child);
-			break;
-		case("contacts"):
-			$contacts = array();
-			$i = 0;
-			foreach( $child->children() as $subchild )
-			{
-				$contacts[$i][$subchild->getName()] = $subchild;
-				$i++;
-			}
-			break;					
+			break;				
 	}
 }
 
